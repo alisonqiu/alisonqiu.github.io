@@ -1,26 +1,240 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --walnut: #3d2b1f;
+  --walnut-light: #5c4033;
+  --walnut-dark: #2a1e16;
+  --cream: #f5f0e6;
+  --cream-dark: #e8dfd0;
+  --ink: #1a1410;
+  --ink-muted: #4a3f35;
+  --gold: #b8956a;
+  --gold-light: #d4b896;
+  --leather: #4a2c2a;
+  --leather-light: #6b3f3a;
+  --paper-shadow: rgba(26, 20, 16, 0.15);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-walnut: var(--walnut);
+  --color-walnut-light: var(--walnut-light);
+  --color-walnut-dark: var(--walnut-dark);
+  --color-cream: var(--cream);
+  --color-cream-dark: var(--cream-dark);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-leather: var(--leather);
+  --font-serif: var(--font-lora);
+  --font-display: var(--font-cormorant);
+  --font-mono: var(--font-jetbrains);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--walnut-dark);
+  color: var(--ink);
+  font-family: var(--font-lora), Georgia, serif;
+}
+
+/* Wood grain desk */
+.wood-desk {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(255, 220, 160, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 60%, rgba(255, 200, 120, 0.05) 0%, transparent 40%),
+    linear-gradient(175deg, #4a3528 0%, #3d2b1f 30%, #352418 60%, #2a1e16 100%);
+}
+
+.wood-grain {
+  background-image:
+    repeating-linear-gradient(
+      88deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px
+    ),
+    repeating-linear-gradient(
+      92deg,
+      transparent,
+      transparent 8px,
+      rgba(255, 255, 255, 0.02) 8px,
+      rgba(255, 255, 255, 0.02) 9px
+    );
+}
+
+/* Leather texture */
+.leather-texture {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(0, 0, 0, 0.1) 0%, transparent 40%),
+    linear-gradient(145deg, #5c3835 0%, #4a2c2a 40%, #3d2420 100%);
+}
+
+/* Paper texture */
+.paper-texture {
+  background-color: var(--cream);
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+.graph-paper {
+  background-color: #f8f6f0;
+  background-image:
+    linear-gradient(rgba(26, 20, 16, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 20, 16, 0.06) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Embossed effect for cover icons */
+.embossed {
+  color: transparent;
+  background: linear-gradient(145deg, #8a6555 0%, #3d2420 50%, #6b4a40 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.15))
+    drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.4));
+}
+
+.embossed-icon {
+  position: relative;
+  color: #5a3d35;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.2),
+    0 -1px 0 rgba(0, 0, 0, 0.5),
+    1px 1px 2px rgba(0, 0, 0, 0.3);
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.embossed-icon:hover {
+  color: var(--gold-light);
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.3),
+    0 -1px 0 rgba(0, 0, 0, 0.4),
+    0 0 8px rgba(184, 149, 106, 0.4);
+}
+
+/* Handwriting style */
+.handwriting {
+  font-family: var(--font-caveat), cursive;
+}
+
+/* Coffee stain */
+.coffee-stain {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    rgba(139, 90, 43, 0.12) 0%,
+    rgba(139, 90, 43, 0.06) 40%,
+    rgba(139, 90, 43, 0.02) 70%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Sticky note */
+.sticky-note {
+  background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+  box-shadow:
+    2px 3px 8px rgba(0, 0, 0, 0.15),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.05);
+  transform: rotate(-2deg);
+}
+
+/* Page curl shadow */
+.page-curl-shadow {
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.25) 0%,
+    rgba(0, 0, 0, 0.08) 40%,
+    transparent 100%
+  );
+}
+
+/* Chapter tab */
+.chapter-tab {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.chapter-tab:hover {
+  transform: translateX(-2px);
+}
+
+/* Bookmark tab */
+.bookmark-tab {
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.bookmark-tab:hover,
+.bookmark-tab.active {
+  filter: brightness(1.15);
+  transform: translateY(-2px);
+}
+
+/* Scrollbar for page content */
+.page-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) transparent;
+}
+
+.page-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.page-scroll::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
