@@ -47,6 +47,7 @@ export const ABOUT = {
     "puzzle solver",
     "rollercoaster rider",
     "hiker",
+    "magician (math based card tricks only)",
     "..."
   ],
   work: `I currently work at ZipRecruiter and live in the greater Los Angeles area, after a previous relationship brought me from Texas to California. Prior to the move, I worked at Two Sigma in Houston. I graduated from Rice University with a degree in Computer Science and a minor in Data Science.`,
@@ -58,7 +59,7 @@ export const ABOUT = {
       href: "https://hanayama-toys.com/product-category/puzzles/huzzle/",
     },
     {
-      label: "Quantum physics",
+      label: "Building iPhone automations and shortcuts",
       href: null,
     },
     {
@@ -212,31 +213,26 @@ export const SKILL_CATEGORIES = [
     name: "Languages",
     icon: "◈",
     skills: ["Java", "JavaScript", "Python", "Go", "C", "Swift", "TypeScript"],
-    note: "polyglot by necessity",
   },
   {
     name: "Systems & Infra",
     icon: "⬡",
     skills: ["Docker", "Kubernetes", "AWS", "GCP", "Redis", "Apache Spark"],
-    note: "pipelines at scale",
   },
   {
     name: "Frontend",
     icon: "◇",
     skills: ["React", "Next.js", "HTML/CSS", "Mapbox", "Swift/iOS"],
-    note: "interfaces that tell stories",
   },
   {
     name: "Data & ML",
     icon: "◎",
     skills: ["PyTorch", "TensorFlow", "SQL", "Pandas", "R", "Tableau"],
-    note: "from notebooks to production",
   },
   {
     name: "Practices",
     icon: "✦",
     skills: ["API Design", "DevOps", "OOP", "Database Systems", "Web Scraping"],
-    note: "engineering discipline",
   },
 ];
 
@@ -257,8 +253,8 @@ export const AFK = {
       author: "Jeremiah 29:11",
     },
     {
-      text: "The cosmos is within us. We are made of star-stuff.",
-      author: "Carl Sagan",
+      text: "We can be blind to the obvious, and we are also blind to our blindness.",
+      author: "Daniel Kahneman",
     },
   ],
   twoTruthsAndALie: [

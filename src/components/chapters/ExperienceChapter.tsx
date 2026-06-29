@@ -2,6 +2,7 @@
 
 import { EXPERIENCES } from "@/data/portfolio";
 import ExperienceBlueprintCard from "@/components/shared/ExperienceBlueprintCard";
+import { JOURNAL_PAGE, JOURNAL_PAGE_DIVIDER } from "@/constants/journal";
 
 export default function ExperienceChapter() {
   const midpoint = Math.ceil(EXPERIENCES.length / 2);
@@ -9,7 +10,7 @@ export default function ExperienceChapter() {
   return (
     <>
       {/* Left page */}
-      <div className="graph-paper relative flex h-full flex-col overflow-hidden p-5 sm:p-6">
+      <div className={`graph-paper ${JOURNAL_PAGE}`}>
         <h2 className="type-page-title text-ink">Experience</h2>
         <p className="type-label mt-1 text-ink-muted">in the corporate world</p>
         <p className="handwriting mt-2 text-base text-gold">
@@ -25,7 +26,7 @@ export default function ExperienceChapter() {
       </div>
 
       {/* Right page */}
-      <div className="graph-paper relative flex h-full flex-col overflow-hidden border-l border-ink/10 p-5 sm:p-6">
+      <div className={`graph-paper ${JOURNAL_PAGE} ${JOURNAL_PAGE_DIVIDER} md:border-l md:border-ink/10`}>
         <p className="type-label mb-3 text-ink-muted">Sheet 2 of 2</p>
 
         <div className="page-scroll grid flex-1 grid-cols-1 gap-2.5 overflow-y-auto">

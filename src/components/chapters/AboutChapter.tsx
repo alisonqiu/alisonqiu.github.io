@@ -1,23 +1,151 @@
 "use client";
 
+import { useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
 import { ABOUT } from "@/data/portfolio";
 import { useJournal } from "@/context/JournalContext";
+import { JOURNAL_PAGE, JOURNAL_PAGE_DIVIDER } from "@/constants/journal";
+import type { ChapterId } from "@/types/journal";
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return <p className="type-label mb-2 text-gold">{children}</p>;
 }
 
-export default function AboutChapter() {
+type AdventurePath = "engineering" | "hobbies";
+
+const PATHS: {
+  id: AdventurePath;
+  chapter: ChapterId;
+  label: string;
+  flavor: string;
+  emoji: string;
+}[] = [
+  {
+    id: "engineering",
+    chapter: "experience",
+    label: "I'm here for the software engineering work",
+    flavor: "Turning to the engineering chapter…",
+    emoji: "",
+  },
+  {
+    id: "hobbies",
+    chapter: "afk",
+    label: "I'm more curious about your hobbies & interests",
+    flavor: "Turning to the AFK chapter…",
+    emoji: "",
+  },
+];
+
+function ChooseYourAdventure() {
   const { goToChapter } = useJournal();
   const prefersReducedMotion = useReducedMotion();
+  const sentinelRef = useRef<HTMLDivElement>(null);
+  const isReady = useInView(sentinelRef, { once: true, amount: 0.6 });
+  const [chosen, setChosen] = useState<AdventurePath | null>(null);
+
+  const handleChoice = (path: AdventurePath) => {
+    if (chosen) return;
+    setChosen(path);
+    const { chapter } = PATHS.find((p) => p.id === path)!;
+    window.setTimeout(() => goToChapter(chapter), prefersReducedMotion ? 0 : 750);
+  };
+
+  const chosenPath = PATHS.find((p) => p.id === chosen);
 
   return (
     <>
+      <div ref={sentinelRef} className="h-1 w-full shrink-0" aria-hidden="true" />
+      <AnimatePresence>
+        {isReady && (
+          <motion.div
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 320, damping: 22 }}
+            className="relative mt-6 rounded-sm border-2 border-dashed border-gold/50 bg-cream-dark/40 p-4 md:p-5"
+            role="group"
+            aria-label="Choose your adventure"
+          >
+            <p className="handwriting text-xl leading-snug text-ink md:text-2xl">
+              To learn more about me, what brings you here today?
+            </p>
+            <p className="type-body-sm mt-1.5 text-ink-muted">Choose one:</p>
+
+            <div className="mt-4 space-y-2.5">
+              {PATHS.map((path, i) => {
+                const isSelected = chosen === path.id;
+                const isFaded = chosen !== null && !isSelected;
+
+                return (
+                  <motion.button
+                    key={path.id}
+                    type="button"
+                    onClick={() => handleChoice(path.id)}
+                    disabled={chosen !== null}
+                    initial={prefersReducedMotion ? false : { opacity: 0, x: -12 }}
+                    animate={{
+                      opacity: isFaded ? 0.35 : 1,
+                      x: 0,
+                      scale: isSelected ? 1.02 : 1,
+                    }}
+                    transition={{ delay: prefersReducedMotion ? 0 : 0.12 + i * 0.1 }}
+                    whileHover={chosen ? undefined : { x: 4 }}
+                    whileTap={chosen ? undefined : { scale: 0.98 }}
+                    className={`group flex w-full items-start gap-3 rounded-sm border px-3.5 py-3 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold disabled:cursor-default ${
+                      isSelected
+                        ? "border-gold bg-gold/15 shadow-[0_4px_16px_rgba(184,149,106,0.25)]"
+                        : "border-ink/15 bg-cream hover:border-gold/60 hover:bg-gold/5"
+                    }`}
+                    aria-pressed={isSelected}
+                  >
+                    <span className="type-label mt-0.5 shrink-0 text-gold" aria-hidden="true">
+                      {String.fromCharCode(65 + i)}
+                    </span>
+                    <span className="flex-1">
+                      <span className="type-body-sm block font-medium text-ink group-hover:text-gold">
+                        <span aria-hidden="true">{path.emoji} </span>
+                        {path.label}
+                      </span>
+                    </span>
+                    <span
+                      className={`shrink-0 text-gold transition-transform ${
+                        isSelected ? "translate-x-1" : "opacity-0 group-hover:opacity-100"
+                      }`}
+                      aria-hidden="true"
+                    >
+                      →
+                    </span>
+                  </motion.button>
+                );
+              })}
+            </div>
+
+            <AnimatePresence>
+              {chosenPath && (
+                <motion.p
+                  key={chosenPath.id}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="handwriting mt-4 text-center text-lg text-gold"
+                >
+                  {chosenPath.flavor}
+                </motion.p>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
+export default function AboutChapter() {
+  return (
+    <>
       {/* Left page — who & where */}
-      <div className="paper-texture relative flex h-full flex-col overflow-hidden p-5 sm:p-6">
-        <div className="coffee-stain top-6 right-3 h-12 w-12 opacity-60" />
+      <div className={`paper-texture ${JOURNAL_PAGE}`}>
+        <div className="coffee-stain top-6 right-3 hidden h-12 w-12 opacity-60 sm:block" />
 
         <h2 className="type-page-title text-ink">About Me</h2>
         <div className="mb-3 h-px w-10 bg-gold/50" />
@@ -65,73 +193,11 @@ export default function AboutChapter() {
           {ABOUT.work}
         </motion.p>
 
-        <p className="handwriting mt-auto text-lg text-gold">always curious, rarely bored</p>
+        <p className="handwriting mt-auto text-lg text-gold">I like to learn about random things</p>
       </div>
 
       {/* Right page — exploring & rabbit holes */}
-      <div className="paper-texture relative flex h-full flex-col overflow-hidden border-l border-ink/5 p-5 sm:p-6">
-        <motion.div
-          className="relative mb-5 pt-1"
-          initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.55, y: 16, rotate: -4 }}
-          animate={{ opacity: 1, scale: 1, y: 0, rotate: 0 }}
-          transition={{
-            type: "spring",
-            stiffness: 420,
-            damping: 14,
-            delay: 0.08,
-          }}
-        >
-          <motion.span
-            className="type-label absolute -top-2 right-2 z-10 rounded-full border border-gold/60 bg-gold px-2.5 py-1 text-cream shadow-[0_2px_8px_rgba(184,149,106,0.45)]"
-            initial={prefersReducedMotion ? false : { scale: 0, rotate: 18 }}
-            animate={{ scale: 1, rotate: 8 }}
-            transition={{ type: "spring", stiffness: 500, damping: 12, delay: 0.35 }}
-            aria-hidden="true"
-          >
-            Psst!
-          </motion.span>
-
-          <motion.button
-            type="button"
-            onClick={() => goToChapter("afk")}
-            className="afk-callout group relative w-full cursor-pointer rounded-2xl border-2 border-gold/70 bg-cream px-4 py-3.5 text-left shadow-[0_4px_18px_rgba(184,149,106,0.28)] transition-colors hover:border-gold hover:bg-gold/10 hover:shadow-[0_6px_22px_rgba(184,149,106,0.38)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-            animate={
-              prefersReducedMotion
-                ? undefined
-                : {
-                    y: [0, -5, 0],
-                    boxShadow: [
-                      "0 4px 18px rgba(184, 149, 106, 0.28)",
-                      "0 8px 26px rgba(184, 149, 106, 0.42)",
-                      "0 4px 18px rgba(184, 149, 106, 0.28)",
-                    ],
-                  }
-            }
-            transition={
-              prefersReducedMotion
-                ? undefined
-                : { duration: 2.8, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.4 }
-            }
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            aria-label="Go to AFK chapter — personal interests, Goodreads, quotes, and podcasts"
-          >
-            <span className="flex items-center justify-between gap-3">
-              <span className="block pr-1">
-                <span className="handwriting block text-lg font-semibold leading-snug text-ink group-hover:text-gold sm:text-xl">
-                  If you have no interest in software engineering, click here to see my personal interests!
-                </span>
-              </span>
-              <span
-                className="shrink-0 text-2xl text-gold transition-transform group-hover:translate-x-1"
-                aria-hidden="true"
-              >
-                →
-              </span>
-            </span>
-          </motion.button>
-        </motion.div>
-
+      <div className={`paper-texture page-scroll ${JOURNAL_PAGE} ${JOURNAL_PAGE_DIVIDER} md:overflow-y-auto md:border-l md:border-ink/5`}>
         <SectionLabel>Exploring</SectionLabel>
         <motion.p
           className="type-body-sm mb-4 text-ink-muted"
@@ -168,6 +234,8 @@ export default function AboutChapter() {
             </motion.li>
           ))}
         </ul>
+
+        <ChooseYourAdventure />
       </div>
     </>
   );

@@ -231,6 +231,31 @@ body {
   transform: translateX(-2px);
 }
 
+/* Mobile bottom chapter tabs */
+.chapter-tab-mobile {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+/* Scrollable journal spread on mobile */
+.journal-spread {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) transparent;
+}
+
+.journal-spread::-webkit-scrollbar {
+  width: 3px;
+}
+
+.journal-spread::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 2px;
+}
+
 /* Bookmark tab */
 .bookmark-tab {
   clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);

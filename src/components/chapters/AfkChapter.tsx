@@ -4,13 +4,14 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { AFK } from "@/data/portfolio";
 import TwoTruthsAndALie from "@/components/shared/TwoTruthsAndALie";
+import { JOURNAL_PAGE, JOURNAL_PAGE_DIVIDER } from "@/constants/journal";
 
 export default function AfkChapter() {
   return (
     <>
       {/* Left page — reading & fun facts */}
-      <div className="paper-texture relative flex h-full flex-col overflow-hidden p-5 sm:p-6">
-        <div className="coffee-stain bottom-20 -left-2 h-14 w-14 opacity-70" />
+      <div className={`paper-texture ${JOURNAL_PAGE}`}>
+        <div className="coffee-stain bottom-20 -left-2 hidden h-14 w-14 opacity-70 sm:block" />
 
         <h2 className="type-page-title text-ink">AFK</h2>
         <p className="type-label mt-1 text-ink-muted">{AFK.subtitle}</p>
@@ -43,7 +44,7 @@ export default function AfkChapter() {
       </div>
 
       {/* Right page — quotes, etc */}
-      <div className="paper-texture relative flex h-full flex-col overflow-hidden border-l border-ink/5 p-5 sm:p-6">
+      <div className={`paper-texture ${JOURNAL_PAGE} ${JOURNAL_PAGE_DIVIDER} md:border-l md:border-ink/5`}>
         <div className="page-scroll flex-1 space-y-4 overflow-y-auto pr-0.5">
           <motion.div
             className="relative mx-auto w-full max-w-[200px] rotate-[1.5deg]"

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PROJECTS } from "@/data/portfolio";
+import { JOURNAL_PAGE, JOURNAL_PAGE_DIVIDER } from "@/constants/journal";
 
 const PROJECT_COLORS = [
   "#8B6914",
@@ -21,7 +22,7 @@ export default function ProjectsChapter() {
   return (
     <>
       {/* Left page — bookmark tabs + project details */}
-      <div className="paper-texture relative flex h-full flex-col overflow-hidden p-5 sm:p-6">
+      <div className={`paper-texture ${JOURNAL_PAGE}`}>
         <h2 className="type-page-title text-ink">Projects</h2>
         <div className="mb-3 h-px w-12 bg-gold/50" />
 
@@ -78,7 +79,7 @@ export default function ProjectsChapter() {
       </div>
 
       {/* Right page — technologies + github */}
-      <div className="paper-texture relative flex h-full flex-col overflow-hidden border-l border-ink/5 p-5 sm:p-6">
+      <div className={`paper-texture ${JOURNAL_PAGE} ${JOURNAL_PAGE_DIVIDER} md:border-l md:border-ink/5`}>
         <p className="type-label mb-2 text-gold">Stack</p>
 
         <div className="flex flex-wrap gap-2">

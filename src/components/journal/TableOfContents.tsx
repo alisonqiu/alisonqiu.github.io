@@ -4,13 +4,14 @@ import { motion } from "framer-motion";
 import { CHAPTERS } from "@/data/portfolio";
 import { useJournal } from "@/context/JournalContext";
 import type { ChapterId } from "@/types/journal";
+import { JOURNAL_PAGE } from "@/constants/journal";
 
 export default function TableOfContents() {
   const { currentSpread, goToChapter } = useJournal();
 
   return (
-    <div className="paper-texture relative flex h-full flex-col p-6 sm:p-8">
-      <div className="coffee-stain -right-4 -bottom-4 h-24 w-24" />
+    <div className={`paper-texture ${JOURNAL_PAGE}`}>
+      <div className="coffee-stain -right-4 -bottom-4 hidden h-24 w-24 sm:block" />
 
       <h2 className="type-page-title mb-2 text-ink">Table of Contents</h2>
       <div className="mb-6 h-px w-full bg-ink/10" />
