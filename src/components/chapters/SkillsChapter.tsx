@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { SKILL_CATEGORIES } from "@/data/portfolio";
+import { JOURNAL_PAGE, JOURNAL_PAGE_DIVIDER } from "@/constants/journal";
 
 const LEFT_CATEGORIES = SKILL_CATEGORIES.slice(0, 3);
 const RIGHT_CATEGORIES = SKILL_CATEGORIES.slice(3);
@@ -10,13 +11,11 @@ function CategoryBlock({
   name,
   icon,
   skills,
-  note,
   index,
 }: {
   name: string;
   icon: string;
   skills: string[];
-  note: string;
   index: number;
 }) {
   return (
@@ -33,7 +32,6 @@ function CategoryBlock({
         <h3 className="type-section-title text-ink">{name}</h3>
       </div>
       <div className="mb-2 h-px w-full bg-gold/25" />
-      <p className="handwriting type-body-sm mb-2 italic text-ink-muted/80">{note}</p>
       <ul className="grid grid-cols-2 gap-x-3 gap-y-1">
         {skills.map((skill) => (
           <li key={skill} className="type-body-sm flex items-baseline gap-1.5 text-ink-muted">
@@ -50,8 +48,8 @@ export default function SkillsChapter() {
   return (
     <>
       {/* Left page */}
-      <div className="paper-texture relative flex h-full flex-col overflow-hidden p-5 sm:p-6">
-        <div className="coffee-stain -right-2 bottom-16 h-14 w-14 opacity-60" />
+      <div className={`paper-texture ${JOURNAL_PAGE}`}>
+        <div className="coffee-stain -right-2 bottom-16 hidden h-14 w-14 opacity-60 sm:block" />
 
         <h2 className="type-page-title text-ink">Skills</h2>
         <div className="mb-2 h-px w-12 bg-gold/50" />
@@ -64,7 +62,7 @@ export default function SkillsChapter() {
       </div>
 
       {/* Right page */}
-      <div className="paper-texture relative flex h-full flex-col overflow-hidden border-l border-ink/5 p-5 sm:p-6">
+      <div className={`paper-texture ${JOURNAL_PAGE} ${JOURNAL_PAGE_DIVIDER} md:border-l md:border-ink/5`}>
         <p className="type-label mb-4 text-ink-muted/70">Inventory — cont.</p>
 
         <div className="page-scroll flex-1 overflow-y-auto pr-0.5">

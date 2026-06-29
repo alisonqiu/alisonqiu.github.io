@@ -58,7 +58,7 @@ export const ABOUT = {
       href: "https://hanayama-toys.com/product-category/puzzles/huzzle/",
     },
     {
-      label: "Quantum physics",
+      label: "Building iPhone automations and shortcuts",
       href: null,
     },
     {
@@ -212,31 +212,26 @@ export const SKILL_CATEGORIES = [
     name: "Languages",
     icon: "◈",
     skills: ["Java", "JavaScript", "Python", "Go", "C", "Swift", "TypeScript"],
-    note: "polyglot by necessity",
   },
   {
     name: "Systems & Infra",
     icon: "⬡",
     skills: ["Docker", "Kubernetes", "AWS", "GCP", "Redis", "Apache Spark"],
-    note: "pipelines at scale",
   },
   {
     name: "Frontend",
     icon: "◇",
     skills: ["React", "Next.js", "HTML/CSS", "Mapbox", "Swift/iOS"],
-    note: "interfaces that tell stories",
   },
   {
     name: "Data & ML",
     icon: "◎",
     skills: ["PyTorch", "TensorFlow", "SQL", "Pandas", "R", "Tableau"],
-    note: "from notebooks to production",
   },
   {
     name: "Practices",
     icon: "✦",
     skills: ["API Design", "DevOps", "OOP", "Database Systems", "Web Scraping"],
-    note: "engineering discipline",
   },
 ];
 

@@ -16,7 +16,7 @@ import { TOTAL_SPREADS } from "@/data/portfolio";
 
 function TocWelcomePage() {
   return (
-    <div className="paper-texture relative flex h-full flex-col items-center justify-center overflow-hidden p-6">
+    <div className="paper-texture relative flex h-auto min-h-[40vh] flex-col items-center justify-center overflow-visible p-6 md:h-full md:min-h-0 md:overflow-hidden">
       <div className="coffee-stain top-12 left-8 h-16 w-16" />
       <motion.svg
         viewBox="0 0 200 160"
@@ -218,14 +218,14 @@ export default function Journal() {
         {/* Journal pages — visible when open or animating open */}
         {(isOpen || phase === "opening") && (
           <div
-            className={`absolute inset-0 z-10 grid grid-cols-2 overflow-hidden ${
+            className={`absolute inset-0 z-10 overflow-hidden ${
               isFullscreen ? "" : "rounded-r-sm"
             }`}
             style={{ marginLeft: isFullscreen ? 0 : 12 }}
           >
             <motion.div
               key={currentSpread}
-              className="col-span-2 grid h-full grid-cols-2"
+              className="journal-spread grid h-full min-h-0 grid-cols-1 overflow-y-auto overscroll-contain pt-8 pb-[calc(3.75rem+env(safe-area-inset-bottom,0px))] touch-pan-y md:grid-cols-2 md:overflow-hidden md:pt-0 md:pb-0"
               initial={
                 isFlipping
                   ? {
@@ -245,7 +245,7 @@ export default function Journal() {
               <button
                 type="button"
                 onClick={closeCover}
-                className="handwriting absolute right-3 bottom-3 z-30 rounded-sm bg-cream/90 px-3 py-2 text-base text-ink-muted shadow-md backdrop-blur-sm transition-colors hover:text-gold"
+                className="handwriting absolute top-3 left-3 z-30 rounded-sm bg-cream/90 px-3 py-1.5 text-sm text-ink-muted shadow-md backdrop-blur-sm transition-colors hover:text-gold md:top-auto md:right-3 md:bottom-3 md:left-auto md:py-2 md:text-base"
                 style={{ fontFamily: "var(--font-caveat)" }}
                 aria-label="Close journal and return to cover"
               >
@@ -305,7 +305,9 @@ export default function Journal() {
         {isOpen && (
           <div
             className={`absolute left-1/2 z-40 flex -translate-x-1/2 items-center gap-2 ${
-              isFullscreen ? "bottom-4" : "-bottom-8"
+              isFullscreen
+                ? "top-3 md:top-auto md:bottom-4"
+                : "-bottom-8"
             }`}
             aria-live="polite"
             aria-atomic="true"

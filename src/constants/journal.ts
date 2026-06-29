@@ -11,3 +11,10 @@ export const JOURNAL_FULLSCREEN_STYLE = {
   width: "100%",
   height: "100%",
 } as const;
+
+/** Shared responsive layout for journal page columns */
+export const JOURNAL_PAGE =
+  "relative flex h-auto flex-col overflow-visible p-5 md:h-full md:min-h-0 md:overflow-hidden sm:p-6";
+
+/** Separates stacked right pages on mobile; left border on desktop */
+export const JOURNAL_PAGE_DIVIDER = "border-t border-ink/5 pt-6 md:border-t-0 md:pt-5";
