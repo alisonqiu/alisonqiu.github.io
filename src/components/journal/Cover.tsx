@@ -36,13 +36,16 @@ const LINKS = [
 
 interface CoverProps {
   isOpen: boolean;
+  isFullscreen?: boolean;
   onOpen: () => void;
 }
 
-export default function Cover({ isOpen, onOpen }: CoverProps) {
+export default function Cover({ isOpen, isFullscreen = false, onOpen }: CoverProps) {
   return (
     <div
-      className="leather-texture absolute inset-0 overflow-hidden rounded-r-sm rounded-l-md"
+      className={`leather-texture absolute inset-0 overflow-hidden ${
+        isFullscreen ? "" : "rounded-r-sm rounded-l-md"
+      }`}
       style={{
         transformOrigin: "left center",
         backfaceVisibility: "hidden",
@@ -52,7 +55,9 @@ export default function Cover({ isOpen, onOpen }: CoverProps) {
       }}
     >
       <div
-        className="absolute left-0 top-0 bottom-0 z-20 w-3 rounded-l-md"
+        className={`absolute left-0 top-0 bottom-0 z-20 w-3 ${
+          isFullscreen ? "" : "rounded-l-md"
+        }`}
         style={{
           background: "linear-gradient(to right, #2a1815, #4a2c2a, #3d2420)",
           boxShadow: "inset -2px 0 4px rgba(0,0,0,0.4)",
@@ -90,7 +95,7 @@ export default function Cover({ isOpen, onOpen }: CoverProps) {
 
         <div className="absolute right-0 bottom-0 left-0 z-10 px-4 pb-5 pt-20 text-center">
           <h1
-            className="text-2xl font-semibold tracking-wide sm:text-3xl"
+            className="type-page-title tracking-wide"
             style={{
               fontFamily: "var(--font-cormorant)",
               color: "#f5f0e6",
@@ -101,7 +106,7 @@ export default function Cover({ isOpen, onOpen }: CoverProps) {
           </h1>
 
           <nav
-            className="mt-3 flex flex-wrap items-center justify-center gap-2"
+            className="mt-4 flex flex-wrap items-center justify-center gap-2.5"
             aria-label="Contact links"
             onClick={(e) => e.stopPropagation()}
           >
@@ -111,12 +116,12 @@ export default function Cover({ isOpen, onOpen }: CoverProps) {
                 href={href}
                 target={href.startsWith("mailto") ? undefined : "_blank"}
                 rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                className="flex items-center gap-1 rounded-full border border-[#c4a882]/40 bg-black/30 px-2.5 py-1 text-[#e8dfd0] backdrop-blur-sm transition-colors hover:border-[#c4a882] hover:bg-black/45"
+                className="flex items-center gap-1.5 rounded-full border border-[#c4a882]/40 bg-black/30 px-3 py-1.5 text-[#e8dfd0] backdrop-blur-sm transition-colors hover:border-[#c4a882] hover:bg-black/45"
                 aria-label={label}
                 onClick={(e) => e.stopPropagation()}
               >
                 <Icon />
-                <span className="text-[10px] font-medium tracking-wide">{label}</span>
+                <span className="type-caption font-medium tracking-wide">{label}</span>
               </a>
             ))}
           </nav>
@@ -125,7 +130,7 @@ export default function Cover({ isOpen, onOpen }: CoverProps) {
             <motion.button
               type="button"
               onClick={onOpen}
-              className="handwriting mt-3 text-base text-[#d4b896] underline-offset-4 hover:underline"
+              className="handwriting mt-4 text-xl text-[#d4b896] underline-offset-4 hover:underline"
               style={{ fontFamily: "var(--font-caveat)" }}
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}

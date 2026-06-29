@@ -11,7 +11,7 @@ import SkillsChapter from "@/components/chapters/SkillsChapter";
 import AfkChapter from "@/components/chapters/AfkChapter";
 import ChapterTabs from "./ChapterTabs";
 import Cover from "./Cover";
-import { JOURNAL_STYLE } from "@/constants/journal";
+import { JOURNAL_FULLSCREEN_STYLE, JOURNAL_STYLE } from "@/constants/journal";
 import { TOTAL_SPREADS } from "@/data/portfolio";
 
 function TocWelcomePage() {
@@ -34,12 +34,12 @@ function TocWelcomePage() {
         <path d="M30 140 Q100 100, 170 140" fill="none" stroke="#b8956a" strokeWidth="0.8" />
       </motion.svg>
       <p
-        className="handwriting mt-4 text-center text-xl text-ink-muted"
+        className="handwriting mt-4 text-center text-2xl text-ink-muted"
         style={{ fontFamily: "var(--font-caveat)" }}
       >
         an engineer&apos;s journal
       </p>
-      <p className="mt-2 text-center text-xs text-ink-muted/70">
+      <p className="type-body-sm mt-3 text-center text-ink-muted/80">
         Turn the page or select a chapter →
       </p>
     </div>
@@ -79,6 +79,7 @@ export default function Journal() {
 
   const isOpen = phase === "open";
   const isCoverAnimating = COVER_ANIMATING.has(phase);
+  const isFullscreen = phase !== "closed";
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -169,7 +170,7 @@ export default function Journal() {
 
   return (
     <div
-      className="relative"
+      className={isFullscreen ? "relative h-full w-full" : "relative"}
       style={{ perspective: 2000 }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
@@ -177,9 +178,9 @@ export default function Journal() {
       aria-label="Portfolio journal"
     >
       <motion.div
-        className="relative"
+        className="relative h-full w-full"
         style={{
-          ...JOURNAL_STYLE,
+          ...(isFullscreen ? JOURNAL_FULLSCREEN_STYLE : JOURNAL_STYLE),
           transformStyle: "preserve-3d",
         }}
         initial={{ scale: 0.95, opacity: 0 }}
@@ -188,34 +189,39 @@ export default function Journal() {
       >
         {/* Journal body */}
         <div
-          className="absolute inset-0 rounded-r-sm rounded-l-md"
+          className={`absolute inset-0 ${isFullscreen ? "" : "rounded-r-sm rounded-l-md"}`}
           style={{
             background: "linear-gradient(to right, #e8dfd0, #f5f0e6, #e8dfd0)",
-            boxShadow: "4px 8px 32px rgba(0,0,0,0.45), 0 2px 4px rgba(0,0,0,0.2)",
+            boxShadow: isFullscreen
+              ? "none"
+              : "4px 8px 32px rgba(0,0,0,0.45), 0 2px 4px rgba(0,0,0,0.2)",
             transform: "translateZ(-2px)",
           }}
         />
 
-        {[1, 2, 3].map((i) => (
-          <div
-            key={i}
-            className="absolute rounded-r-sm"
-            style={{
-              top: i,
-              bottom: i,
-              left: 4 + i,
-              right: -i,
-              background: "#e8dfd0",
-              zIndex: i,
-            }}
-          />
-        ))}
+        {!isFullscreen &&
+          [1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="absolute rounded-r-sm"
+              style={{
+                top: i,
+                bottom: i,
+                left: 4 + i,
+                right: -i,
+                background: "#e8dfd0",
+                zIndex: i,
+              }}
+            />
+          ))}
 
         {/* Journal pages — visible when open or animating open */}
         {(isOpen || phase === "opening") && (
           <div
-            className="absolute inset-0 z-10 grid grid-cols-2 overflow-hidden rounded-r-sm"
-            style={{ marginLeft: 12 }}
+            className={`absolute inset-0 z-10 grid grid-cols-2 overflow-hidden ${
+              isFullscreen ? "" : "rounded-r-sm"
+            }`}
+            style={{ marginLeft: isFullscreen ? 0 : 12 }}
           >
             <motion.div
               key={currentSpread}
@@ -239,7 +245,7 @@ export default function Journal() {
               <button
                 type="button"
                 onClick={closeCover}
-                className="handwriting absolute right-3 bottom-3 z-30 rounded-sm bg-cream/90 px-2.5 py-1.5 text-sm text-ink-muted shadow-md backdrop-blur-sm transition-colors hover:text-gold"
+                className="handwriting absolute right-3 bottom-3 z-30 rounded-sm bg-cream/90 px-3 py-2 text-base text-ink-muted shadow-md backdrop-blur-sm transition-colors hover:text-gold"
                 style={{ fontFamily: "var(--font-caveat)" }}
                 aria-label="Close journal and return to cover"
               >
@@ -292,13 +298,15 @@ export default function Journal() {
             ease: [0.4, 0, 0.2, 1],
           }}
         >
-          <Cover isOpen={isOpen} onOpen={openToAbout} />
+          <Cover isOpen={isOpen} isFullscreen={isFullscreen} onOpen={openToAbout} />
         </motion.div>
 
         {/* Page indicator */}
         {isOpen && (
           <div
-            className="absolute -bottom-8 left-1/2 z-40 flex -translate-x-1/2 items-center gap-2"
+            className={`absolute left-1/2 z-40 flex -translate-x-1/2 items-center gap-2 ${
+              isFullscreen ? "bottom-4" : "-bottom-8"
+            }`}
             aria-live="polite"
             aria-atomic="true"
           >

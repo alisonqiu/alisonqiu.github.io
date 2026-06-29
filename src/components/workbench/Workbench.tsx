@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { JournalProvider } from "@/context/JournalContext";
+import { JournalProvider, useJournal } from "@/context/JournalContext";
 import DeskScene from "@/components/desk/DeskScene";
 import { JOURNAL_STYLE } from "@/constants/journal";
 
@@ -18,6 +18,19 @@ const Journal = dynamic(() => import("@/components/journal/Journal"), {
   ),
 });
 
+function WorkbenchContent() {
+  const { phase } = useJournal();
+  const showDesk = phase === "closed";
+
+  return (
+    <DeskScene showDesk={showDesk}>
+      <div id="journal-main" className={showDesk ? undefined : "h-full w-full"}>
+        <Journal />
+      </div>
+    </DeskScene>
+  );
+}
+
 export default function Workbench() {
   return (
     <JournalProvider>
@@ -27,11 +40,7 @@ export default function Workbench() {
       >
         Skip to journal
       </a>
-      <DeskScene>
-        <div id="journal-main">
-          <Journal />
-        </div>
-      </DeskScene>
+      <WorkbenchContent />
     </JournalProvider>
   );
 }

@@ -32,8 +32,8 @@ export default function Timeline({ items }: TimelineProps) {
               animate={{ scale: 1 }}
               transition={{ delay: 0.5 + i * 0.2, duration: 0.3 }}
             />
-            <span className="font-mono text-xs font-medium text-gold">{item.year}</span>
-            <p className="text-xs leading-relaxed text-ink-muted">{item.event}</p>
+            <span className="font-mono text-sm font-medium text-gold">{item.year}</span>
+            <p className="type-body-sm text-ink-muted">{item.event}</p>
           </motion.li>
         ))}
       </ul>

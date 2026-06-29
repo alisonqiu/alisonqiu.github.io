@@ -6,3 +6,8 @@ export const JOURNAL_STYLE = {
   width: JOURNAL_WIDTH,
   height: JOURNAL_HEIGHT,
 } as const;
+
+export const JOURNAL_FULLSCREEN_STYLE = {
+  width: "100%",
+  height: "100%",
+} as const;

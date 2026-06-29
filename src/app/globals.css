@@ -7,12 +7,17 @@
   --cream: #f5f0e6;
   --cream-dark: #e8dfd0;
   --ink: #1a1410;
-  --ink-muted: #4a3f35;
+  --ink-muted: #3f3630;
   --gold: #b8956a;
   --gold-light: #d4b896;
   --leather: #4a2c2a;
   --leather-light: #6b3f3a;
   --paper-shadow: rgba(26, 20, 16, 0.15);
+  --type-base: 1.125rem;
+  --type-sm: 1rem;
+  --type-label: 0.875rem;
+  --leading-body: 1.7;
+  --leading-snug: 1.55;
 }
 
 @theme inline {
@@ -45,6 +50,10 @@ body {
   background: var(--walnut-dark);
   color: var(--ink);
   font-family: var(--font-lora), Georgia, serif;
+  font-size: var(--type-base);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Wood grain desk */
@@ -86,6 +95,8 @@ body {
   background-color: var(--cream);
   background-image:
     url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  font-size: var(--type-base);
+  line-height: var(--leading-body);
 }
 
 .graph-paper {
@@ -94,6 +105,49 @@ body {
     linear-gradient(rgba(26, 20, 16, 0.06) 1px, transparent 1px),
     linear-gradient(90deg, rgba(26, 20, 16, 0.06) 1px, transparent 1px);
   background-size: 20px 20px;
+  font-size: var(--type-base);
+  line-height: var(--leading-body);
+}
+
+/* Typography scale */
+.type-page-title {
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.type-section-title {
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(1.375rem, 2.75vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.type-label {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: var(--type-label);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  line-height: var(--leading-snug);
+  text-transform: uppercase;
+}
+
+.type-body-sm {
+  font-size: var(--type-sm);
+  line-height: var(--leading-snug);
+}
+
+.type-caption {
+  font-size: 0.9375rem;
+  line-height: var(--leading-snug);
+}
+
+.type-tag {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: var(--type-label);
+  line-height: var(--leading-snug);
 }
 
 /* Embossed effect for cover icons */
@@ -166,7 +220,7 @@ body {
 .chapter-tab {
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  font-size: 0.65rem;
+  font-size: 0.875rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
@@ -226,6 +280,26 @@ body {
   overflow: visible;
   clip: auto;
   white-space: normal;
+}
+
+/* AFK callout speech bubble */
+.afk-callout::after {
+  content: "";
+  position: absolute;
+  bottom: -9px;
+  left: 28px;
+  width: 14px;
+  height: 14px;
+  background: var(--cream);
+  border-right: 2px solid rgba(184, 149, 106, 0.7);
+  border-bottom: 2px solid rgba(184, 149, 106, 0.7);
+  transform: rotate(45deg);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.afk-callout:hover::after {
+  background: color-mix(in srgb, var(--gold) 10%, var(--cream));
+  border-color: var(--gold);
 }
 
 /* Reduced motion */

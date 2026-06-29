@@ -30,7 +30,7 @@ export default function BlueprintCard({
 
   return (
     <motion.article
-      className="graph-paper relative cursor-pointer overflow-hidden rounded border border-ink/10 p-3"
+      className="graph-paper relative cursor-pointer overflow-hidden rounded border border-ink/10 p-4"
       initial={{ opacity: 0, scaleY: 0.6, originY: 0 }}
       animate={{ opacity: 1, scaleY: 1 }}
       transition={{ delay: index * 0.1, duration: 0.5, ease: "easeOut" }}
@@ -55,20 +55,15 @@ export default function BlueprintCard({
 
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3
-            className="text-sm font-semibold text-ink leading-tight"
-            style={{ fontFamily: "var(--font-cormorant)" }}
-          >
-            {title}
-          </h3>
-          <p className="mt-0.5 font-mono text-[10px] text-ink-muted">{date}</p>
+          <h3 className="type-section-title font-semibold text-ink">{title}</h3>
+          <p className="type-label mt-1 text-ink-muted">{date}</p>
         </div>
-        <span className="shrink-0 rounded bg-gold/20 px-1.5 py-0.5 font-mono text-[9px] text-ink-muted">
+        <span className="type-tag shrink-0 rounded bg-gold/20 px-2 py-0.5 text-ink-muted">
           {String(index + 1).padStart(2, "0")}
         </span>
       </div>
 
-      <p className="mt-2 text-xs leading-relaxed text-ink-muted">{overview}</p>
+      <p className="type-body-sm mt-2.5 text-ink-muted">{overview}</p>
 
       <AnimatePresence>
         {expanded && (
@@ -79,24 +74,20 @@ export default function BlueprintCard({
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="mt-3 space-y-2 border-t border-dashed border-ink/15 pt-2">
+            <div className="mt-3 space-y-3 border-t border-dashed border-ink/15 pt-3">
               <div>
-                <span className="font-mono text-[9px] uppercase tracking-wider text-gold">
-                  Problem
-                </span>
-                <p className="text-[11px] text-ink-muted">{problem}</p>
+                <span className="type-label text-gold">Problem</span>
+                <p className="type-body-sm mt-1 text-ink-muted">{problem}</p>
               </div>
               <div>
-                <span className="font-mono text-[9px] uppercase tracking-wider text-gold">
-                  Solution
-                </span>
-                <p className="text-[11px] text-ink-muted">{solution}</p>
+                <span className="type-label text-gold">Solution</span>
+                <p className="type-body-sm mt-1 text-ink-muted">{solution}</p>
               </div>
-              <div className="flex flex-wrap gap-1">
+              <div className="flex flex-wrap gap-1.5">
                 {technologies.map((t) => (
                   <span
                     key={t}
-                    className="rounded border border-ink/10 bg-cream px-1.5 py-0.5 font-mono text-[9px]"
+                    className="type-tag rounded border border-ink/10 bg-cream px-2 py-0.5"
                   >
                     {t}
                   </span>
@@ -107,18 +98,13 @@ export default function BlueprintCard({
                   href={github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-mono text-[10px] text-gold hover:underline"
+                  className="type-caption inline-flex items-center gap-1 font-mono text-gold hover:underline"
                   onClick={(e) => e.stopPropagation()}
                 >
                   View on GitHub →
                 </a>
               )}
-              <p
-                className="handwriting text-sm text-gold"
-                style={{ fontFamily: "var(--font-caveat)" }}
-              >
-                ★ {highlight}
-              </p>
+              <p className="handwriting text-base text-gold">★ {highlight}</p>
             </div>
           </motion.div>
         )}

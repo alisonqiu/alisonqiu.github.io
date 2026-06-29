@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy": "npm run build && npx gh-pages -d out --dotfiles -r https://github.com/alisonqiu/alisonqiu.github.io.git"
   },
   "dependencies": {
     "framer-motion": "^12.42.0",

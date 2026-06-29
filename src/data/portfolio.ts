@@ -36,18 +36,22 @@ export const ABOUT = {
     "reader",
     "philosopher",
     "Christian",
-    "lifelong learner",
+    "a proud nerd",
     "board gamer",
     "traveler",
-    "adventurer",
     "meme collector",
-    "language lover",
+    "language learner",
     "podcast enthusiast",
     "simulation hypothesis believer",
+    "museum enthusiast",
+    "puzzle solver",
+    "rollercoaster rider",
+    "hiker",
+    "..."
   ],
   work: `I currently work at ZipRecruiter and live in the greater Los Angeles area, after a previous relationship brought me from Texas to California. Prior to the move, I worked at Two Sigma in Houston. I graduated from Rice University with a degree in Computer Science and a minor in Data Science.`,
   freeTime:
-    "In my free time I explore whatever random topics I stumble upon. I'll keep this site updated with the most interesting ones, on a best-effort basis.",
+    "In my free time, I explore whatever random topics I stumble upon. I'll (try to) keep this site updated with the most interesting ones.",
   rabbitHoles: [
     {
       label: "Hanayama puzzles",
@@ -191,8 +195,8 @@ export const PROJECTS = [
     highlight: "Cross-platform ML on mobile",
   },
   {
-    id: "terminal-bench",
-    title: "Terminal-Bench Evaluation Platform",
+    id: "llm evaluation",
+    title: "llm evaluation platform",
     date: "2025",
     overview: "Evaluation platform for Terminal-Bench tasks against the Terminus agent.",
     problem: "Agent benchmarking requires reproducible harness infrastructure.",
@@ -241,51 +245,26 @@ export const AFK = {
   goodreads: {
     label: "My Goodreads",
     href: "https://www.goodreads.com/user/show/172815531",
-    note: "shelves, ratings, and the ever-growing TBR pile",
+    note: "(Let's be friends on Goodreads!)",
   },
   quotes: [
     {
-      text: "The unexamined life is not worth living.",
-      author: "Socrates",
+      text: "There are four good things worth practicing. Being kind toward everything alive. Staying level and steady. Feeling happy for any creature anywhere that is happy. And remembering that any suffering is also yours.",
+      author: "Richard Powers",
     },
     {
-      text: "We are what we repeatedly do. Excellence, then, is not an act, but a habit.",
-      author: "Aristotle",
+      text: "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.",
+      author: "Jeremiah 29:11",
     },
     {
       text: "The cosmos is within us. We are made of star-stuff.",
       author: "Carl Sagan",
     },
   ],
-  funFacts: [
-    "I will happily detour any conversation toward board game recommendations.",
-    "My YouTube algorithm is roughly 40% rock remixes of popular songs.",
-    "I once spent an entire weekend on a single Hanayama cast puzzle.",
-    "Podcasts are how I time-travel through other people's rabbit holes.",
-  ],
-  podcasts: [
-    {
-      show: "Lex Fridman Podcast",
-      episode: "Pick your favorite deep-dive",
-      href: "https://lexfridman.com/podcast/",
-      thought: "Long-form conversations are my favorite way to borrow someone else's curiosity for a few hours.",
-    },
-    {
-      show: "Huberman Lab",
-      episode: "Any episode on sleep or focus",
-      href: "https://www.hubermanlab.com/",
-      thought: "Science-backed life hacks I pretend I'll implement immediately.",
-    },
-  ],
-  thoughts: [
-    {
-      date: "ongoing",
-      text: "Updating this page whenever something is too good not to share and too random for LinkedIn.",
-    },
-    {
-      date: "note to self",
-      text: "Add more podcast episodes + marginalia here as they happen.",
-    },
+  twoTruthsAndALie: [
+    { text: "I went on 10 rollercoasters in one day at Six Flags", isLie: false },
+    { text: "I read 97 books in 2025", isLie: false },
+    { text: "I can speak 4 languages", isLie: true },
   ],
 };
 

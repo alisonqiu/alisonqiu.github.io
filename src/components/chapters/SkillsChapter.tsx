@@ -21,35 +21,22 @@ function CategoryBlock({
 }) {
   return (
     <motion.section
-      className="mb-3.5 last:mb-0"
+      className="mb-4 last:mb-0"
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.07, duration: 0.35 }}
     >
-      <div className="mb-1 flex items-center gap-1.5">
-        <span className="text-sm text-gold/80" aria-hidden="true">
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className="text-base text-gold/80" aria-hidden="true">
           {icon}
         </span>
-        <h3
-          className="text-sm font-medium leading-none text-ink"
-          style={{ fontFamily: "var(--font-cormorant)" }}
-        >
-          {name}
-        </h3>
+        <h3 className="type-section-title text-ink">{name}</h3>
       </div>
-      <div className="mb-1.5 h-px w-full bg-gold/25" />
-      <p
-        className="mb-1.5 text-[10px] italic text-ink-muted/80"
-        style={{ fontFamily: "var(--font-caveat)" }}
-      >
-        {note}
-      </p>
-      <ul className="grid grid-cols-2 gap-x-2 gap-y-0.5">
+      <div className="mb-2 h-px w-full bg-gold/25" />
+      <p className="handwriting type-body-sm mb-2 italic text-ink-muted/80">{note}</p>
+      <ul className="grid grid-cols-2 gap-x-3 gap-y-1">
         {skills.map((skill) => (
-          <li
-            key={skill}
-            className="flex items-baseline gap-1 font-mono text-[9px] leading-snug text-ink-muted"
-          >
+          <li key={skill} className="type-body-sm flex items-baseline gap-1.5 text-ink-muted">
             <span className="shrink-0 text-gold/50">·</span>
             <span>{skill}</span>
           </li>
@@ -60,20 +47,14 @@ function CategoryBlock({
 }
 
 export default function SkillsChapter() {
-
   return (
     <>
       {/* Left page */}
-      <div className="paper-texture relative flex h-full flex-col overflow-hidden p-4 sm:p-5">
+      <div className="paper-texture relative flex h-full flex-col overflow-hidden p-5 sm:p-6">
         <div className="coffee-stain -right-2 bottom-16 h-14 w-14 opacity-60" />
 
-        <h2
-          className="text-xl font-semibold text-ink"
-          style={{ fontFamily: "var(--font-cormorant)" }}
-        >
-          Skills
-        </h2>
-        <div className="mb-1 h-px w-12 bg-gold/50" />
+        <h2 className="type-page-title text-ink">Skills</h2>
+        <div className="mb-2 h-px w-12 bg-gold/50" />
 
         <div className="page-scroll flex-1 overflow-y-auto pr-0.5">
           {LEFT_CATEGORIES.map((cat, i) => (
@@ -83,10 +64,8 @@ export default function SkillsChapter() {
       </div>
 
       {/* Right page */}
-      <div className="paper-texture relative flex h-full flex-col overflow-hidden border-l border-ink/5 p-4 sm:p-5">
-        <p className="mb-3 font-mono text-[9px] uppercase tracking-widest text-ink-muted/70">
-          Inventory — cont.
-        </p>
+      <div className="paper-texture relative flex h-full flex-col overflow-hidden border-l border-ink/5 p-5 sm:p-6">
+        <p className="type-label mb-4 text-ink-muted/70">Inventory — cont.</p>
 
         <div className="page-scroll flex-1 overflow-y-auto pr-0.5">
           {RIGHT_CATEGORIES.map((cat, i) => (
@@ -95,7 +74,7 @@ export default function SkillsChapter() {
         </div>
 
         {/* Compact skill map — visual summary */}
-        <div className="mt-2 border-t border-dotted border-ink/10 pt-2">
+        <div className="mt-3 border-t border-dotted border-ink/10 pt-3">
           <svg viewBox="0 0 220 36" className="w-full opacity-20" aria-hidden="true">
             {SKILL_CATEGORIES.map((cat, i) => {
               const x = 12 + i * 42;
@@ -115,7 +94,7 @@ export default function SkillsChapter() {
                     x={x + 17}
                     y={21}
                     textAnchor="middle"
-                    fontSize="7"
+                    fontSize="9"
                     fill="#4a3f35"
                     fontFamily="monospace"
                   >

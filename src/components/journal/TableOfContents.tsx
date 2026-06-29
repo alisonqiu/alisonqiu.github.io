@@ -12,15 +12,10 @@ export default function TableOfContents() {
     <div className="paper-texture relative flex h-full flex-col p-6 sm:p-8">
       <div className="coffee-stain -right-4 -bottom-4 h-24 w-24" />
 
-      <h2
-        className="mb-1 text-2xl font-semibold text-ink"
-        style={{ fontFamily: "var(--font-cormorant)" }}
-      >
-        Table of Contents
-      </h2>
+      <h2 className="type-page-title mb-2 text-ink">Table of Contents</h2>
       <div className="mb-6 h-px w-full bg-ink/10" />
 
-      <ol className="flex flex-1 flex-col justify-center gap-4">
+      <ol className="flex flex-1 flex-col justify-center gap-5">
         {CHAPTERS.map((chapter, i) => (
           <motion.li
             key={chapter.id}
@@ -31,7 +26,7 @@ export default function TableOfContents() {
             <button
               type="button"
               onClick={() => goToChapter(chapter.id as ChapterId)}
-              className={`group flex w-full items-baseline gap-3 text-left transition-colors ${
+              className={`group flex w-full items-baseline gap-4 text-left transition-colors ${
                 currentSpread === chapter.spreadIndex
                   ? "text-gold"
                   : "text-ink hover:text-gold"
@@ -39,21 +34,16 @@ export default function TableOfContents() {
               aria-current={currentSpread === chapter.spreadIndex ? "page" : undefined}
             >
               <span
-                className="text-3xl font-light text-gold/60"
+                className="text-4xl font-light text-gold/60"
                 style={{ fontFamily: "var(--font-cormorant)" }}
               >
                 {String(i + 1).padStart(2, "0")}
               </span>
               <span className="flex-1">
-                <span
-                  className="block text-xl font-medium"
-                  style={{ fontFamily: "var(--font-cormorant)" }}
-                >
-                  {chapter.title}
-                </span>
-                <span className="mt-0.5 block border-b border-dotted border-ink/15 group-hover:border-gold/40" />
+                <span className="type-section-title block font-medium">{chapter.title}</span>
+                <span className="mt-1 block border-b border-dotted border-ink/15 group-hover:border-gold/40" />
               </span>
-              <span className="text-sm text-ink-muted opacity-0 transition-opacity group-hover:opacity-100">
+              <span className="text-base text-ink-muted opacity-0 transition-opacity group-hover:opacity-100">
                 →
               </span>
             </button>
@@ -61,10 +51,7 @@ export default function TableOfContents() {
         ))}
       </ol>
 
-      <p
-        className="handwriting mt-4 text-lg text-ink-muted"
-        style={{ fontFamily: "var(--font-caveat)" }}
-      >
+      <p className="handwriting mt-4 text-xl text-ink-muted">
         begin anywhere — every page tells a story
       </p>
     </div>
