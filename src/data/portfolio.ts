@@ -47,7 +47,7 @@ export const ABOUT = {
     "puzzle solver",
     "rollercoaster rider",
     "hiker",
-    "magician (math based card tricks only)",
+    "magician (math-based card tricks only)",
     "..."
   ],
   work: `I currently work at ZipRecruiter and live in the greater Los Angeles area, after a previous relationship brought me from Texas to California. Prior to the move, I worked at Two Sigma in Houston. I graduated from Rice University with a degree in Computer Science and a minor in Data Science.`,
@@ -196,8 +196,8 @@ export const PROJECTS = [
     highlight: "Cross-platform ML on mobile",
   },
   {
-    id: "llm evaluation",
-    title: "llm evaluation platform",
+    id: "llm-evaluation",
+    title: "LLM Evaluation Platform",
     date: "2025",
     overview: "Evaluation platform for Terminal-Bench tasks against the Terminus agent.",
     problem: "Agent benchmarking requires reproducible harness infrastructure.",

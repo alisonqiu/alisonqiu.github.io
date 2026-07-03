@@ -19,21 +19,18 @@ const PATHS: {
   chapter: ChapterId;
   label: string;
   flavor: string;
-  emoji: string;
 }[] = [
   {
     id: "engineering",
     chapter: "experience",
     label: "I'm here for the software engineering work",
     flavor: "Turning to the engineering chapter…",
-    emoji: "",
   },
   {
     id: "hobbies",
     chapter: "afk",
     label: "I'm more curious about your hobbies & interests",
     flavor: "Turning to the AFK chapter…",
-    emoji: "",
   },
 ];
 
@@ -103,7 +100,6 @@ function ChooseYourAdventure() {
                     </span>
                     <span className="flex-1">
                       <span className="type-body-sm block font-medium text-ink group-hover:text-gold">
-                        <span aria-hidden="true">{path.emoji} </span>
                         {path.label}
                       </span>
                     </span>
